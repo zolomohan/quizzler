@@ -78,6 +78,7 @@ class _QuizPageState extends State<QuizPage> {
                 quizBrain.getQuestion(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                  fontFamily: 'BalooChettan2',
                   fontSize: 25.0,
                   color: Colors.white,
                 ),
@@ -89,16 +90,20 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: FlatButton(
-                textColor: Colors.white,
-                color: Colors.green,
-                child: Text(
-                  'True',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
+              textColor: Colors.white,
+              color: Colors.green,
+              child: Text(
+                'True',
+                style: TextStyle(
+                  fontFamily: 'BalooChettan2',
+                  color: Colors.white,
+                  fontSize: 20.0,
                 ),
-                onPressed: () => onAnswer(true)),
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(50.0)),
+              onPressed: () => onAnswer(true),
+            ),
           ),
         ),
         Expanded(
@@ -109,10 +114,13 @@ class _QuizPageState extends State<QuizPage> {
               child: Text(
                 'False',
                 style: TextStyle(
+                  fontFamily: 'BalooChettan2',
                   fontSize: 20.0,
                   color: Colors.white,
                 ),
               ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(50.0)),
               onPressed: () => onAnswer(false),
             ),
           ),
