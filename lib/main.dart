@@ -1,11 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizzler/QuizBrain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-void main() => runApp(Quizzler());
+void main() => runApp(Quizzer());
 QuizBrain quizBrain = QuizBrain();
 
-class Quizzler extends StatelessWidget {
+class Quizzer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,62 +71,75 @@ class _QuizPageState extends State<QuizPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Expanded(
-          flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(0.0),
+            padding: const EdgeInsets.all(8.0),
             child: Center(
               child: Text(
-                quizBrain.getQuestion(),
-                textAlign: TextAlign.center,
+                'Quizzer',
                 style: TextStyle(
-                  fontFamily: 'BalooChettan2',
-                  fontSize: 25.0,
-                  color: Colors.white,
-                ),
+                    fontFamily: 'BalooChettan2',
+                    color: Colors.white,
+                    fontSize: 70.0,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ),
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              textColor: Colors.white,
-              color: Colors.green,
-              child: Text(
-                'True',
-                style: TextStyle(
-                  fontFamily: 'BalooChettan2',
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
+          flex: 3,
+          child: Center(
+            child: Text(
+              quizBrain.getQuestion(),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'BalooChettan2',
+                fontSize: 25.0,
+                color: Colors.white,
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(50.0)),
-              onPressed: () => onAnswer(true),
             ),
           ),
         ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              color: Colors.red,
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontFamily: 'BalooChettan2',
-                  fontSize: 20.0,
-                  color: Colors.white,
-                ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
+          child: FlatButton(
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            textColor: Colors.white,
+            color: Colors.green,
+            child: Text(
+              'True',
+              style: TextStyle(
+                fontFamily: 'BalooChettan2',
+                color: Colors.white,
+                fontSize: 20.0,
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(50.0)),
-              onPressed: () => onAnswer(false),
             ),
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(50.0)),
+            onPressed: () => onAnswer(true),
           ),
         ),
-        Row(children: scoreKeeper)
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
+          child: FlatButton(
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            color: Colors.red,
+            child: Text(
+              'False',
+              style: TextStyle(
+                fontFamily: 'BalooChettan2',
+                fontSize: 20.0,
+                color: Colors.white,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(50.0)),
+            onPressed: () => onAnswer(false),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(bottom: 10.0),
+          child: Row(children: scoreKeeper),
+        )
       ],
     );
   }
