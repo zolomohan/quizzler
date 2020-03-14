@@ -36,33 +36,31 @@ class _QuizPageState extends State<QuizPage> {
       isOverlayTapDismiss: false,
       backgroundColor: Colors.blueGrey[500]);
 
-  void onAnswer(BuildContext context, bool userAnswer) {
-    checkAnswer(userAnswer);
-    quizBrain.nextQuestion();
-    if (quizBrain.isFinalQuestion()) {
-      Alert(
-              context: context,
-              title: 'Complete',
-              desc: 'Your Score: $score/${quizBrain.getNumberOfQuestions()}',
-              style: alertStyle)
-          .show();
-      reset();
-    }
-  }
-
-  void reset() {
-    quizBrain.reset();
-    score = 0;
-    scoreKeeper = [];
-  }
-
-  void checkAnswer(bool userAnswer) {
+  void onAnswer(bool userAnswer) {
     quizBrain.isAnswer(userAnswer)
         ? setState(() {
             score++;
             scoreKeeper.add(Icon(Icons.check, color: Colors.green));
           })
         : setState(() => scoreKeeper.add(Icon(Icons.close, color: Colors.red)));
+    quizBrain.nextQuestion();
+    if (quizBrain.isFinalQuestion()) {
+      Alert(
+              context: context,
+              title: 'Quiz Complete!',
+              desc: 'Your Score: $score/${quizBrain.getNumberOfQuestions()}',
+              style: alertStyle)
+          .show();
+      resetState();
+    }
+  }
+
+  void resetState() {
+    quizBrain.reset();
+    setState(() {
+      score = 0;
+      scoreKeeper = [];
+    });
   }
 
   @override
@@ -100,7 +98,7 @@ class _QuizPageState extends State<QuizPage> {
                     fontSize: 20.0,
                   ),
                 ),
-                onPressed: () => onAnswer(context, true)),
+                onPressed: () => onAnswer(true)),
           ),
         ),
         Expanded(
@@ -115,7 +113,7 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
-              onPressed: () => onAnswer(context, false),
+              onPressed: () => onAnswer(false),
             ),
           ),
         ),
